@@ -9,7 +9,7 @@
   
 
 <pre>  
-|    <b>func you_win():<b>                      |  
+|    <b>func you_win():<b>                       |  
 |        show_message("Game Over")         |  
 |        $SystemMessage.text = "New Game?" |  
 </b></pre>
