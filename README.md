@@ -9,7 +9,7 @@
   [Hyperlink](https://github.com/JouniJokelainen/GitAndGitHub/blob/main/teht%C3%A4v%C3%A4.md)  
 
 <pre>  
-|    <b>func you_lose():<b>                     |  
+|    <b>func you_lose():<b>                      |  
 |        show_message("Game Over")         |  
 |        $SystemMessage.text = "New Game?" |  
 </b></pre>
