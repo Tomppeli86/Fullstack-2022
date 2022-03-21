@@ -12,7 +12,7 @@
 |    <b>func player_loss():<b>             |  
 |        show_message("Game Over")         |  
 |        $SystemMessage.text = "New Game?" |  
-</pre>
+</b></pre>
   
   
   *
