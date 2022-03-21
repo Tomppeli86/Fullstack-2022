@@ -7,3 +7,15 @@
 
   
   [Hyperlink](https://github.com/JouniJokelainen/GitAndGitHub/blob/main/teht%C3%A4v%C3%A4.md)
+
+|    <b>func player_loss():<b>             |
+|        show_message("Game Over")         |
+|        $SystemMessage.text = "New Game?" |
+  
+  
+  
+  *
+  *
+  *
+  *
+  *
