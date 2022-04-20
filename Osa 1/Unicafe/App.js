@@ -11,7 +11,6 @@ const Button = ({ handleClick, text }) => (
 function hideShow() {
   document.getElementById('clear').style.visibility = "hidden";
   document.getElementById('stats').style.visibility = "visible";
-  
 }
 
 
