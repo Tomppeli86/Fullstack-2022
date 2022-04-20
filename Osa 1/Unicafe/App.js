@@ -23,7 +23,6 @@ const App = () => {
 
   
 
-
   const goodClick = () => {  
     hideShow()
     setGood(good + 1)
