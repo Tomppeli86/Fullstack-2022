@@ -16,6 +16,7 @@ const App = () => {
   const [newSearch, setNewSearch] = useState('')
 
 
+
   const handleName = (event)  => {
     setNewSearch('')
     setNewName(event.target.value)
@@ -44,34 +45,86 @@ const App = () => {
 
 
   const hook = () => {
+
     console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
-      })
+      axios
+        .get('http://localhost:3001/persons')
+        .then(response => {
+            console.log('promise fulfilled')
+            setPersons(response.data)
+        })
   }
   useEffect(hook, [])
 
-    
+
+
+
+
+
+  const deleteNumber = (event) => {
+
+      event.preventDefault()
+      
+      let removeIndex = event.target.value
+      const deletePerson =  personsToShow.find( ({ id }) => id === parseInt(removeIndex) );
+
+        if (window.confirm(`Delete number?`))  {
+
+          axios
+            .delete('http://localhost:3001/persons/'+(personsToShow.indexOf(deletePerson)))
+            .then(response => {
+                console.log(response)
+              })
+
+            personsToShow.splice(personsToShow.indexOf(deletePerson),1);
+            setPersonsToShow(persons)
+              console.log(personsToShow)
+              console.log(persons)
+              console.log(personsToShow.indexOf(deletePerson))
+
+        } else {
+            console.log("return") 
+          return
+      }
+  }
+
+
+
+
+
+
   const clickName = (event)  => {
+
     event.preventDefault()
+      
       if (newName.length === 0 || newNumber.length === 0) {
           alert("Can't have empty fields")
-      return  
-      }
-
+        return  }
+    
     const newPersons = { name: newName, number: newNumber, id: parseInt(persons.length + 1)}
     let existingNumber = persons.filter(person => person.number === newPersons.number)[0]
-    
+    let existingId = persons.filter(person => person.id === newPersons.id)[0]
+
       if (existingNumber) {
           alert("Number is already on the book")
+        return  }
 
-      } else {
-          setPersons(persons.concat(newPersons))
-          setPersonsToShow(persons.concat(newPersons))
-      }
+            if (existingId) {
+              const newPersons2 = { name: newName, number: newNumber, id: parseInt(persons.length + 1 + ({number: Math.random()}))}
+              console.log("RNG ID")
+                setPersons(persons.concat(newPersons2))
+                setPersonsToShow(persons.concat(newPersons2))
+            } else {
+                setPersons(persons.concat(newPersons))
+                setPersonsToShow(persons.concat(newPersons))
+            }
+
+        axios
+          .post('http://localhost:3001/persons', newPersons)
+          .then(response => {
+            console.log(response)
+          })
+
     setNewName('')
     setNewNumber('')
   }
@@ -112,19 +165,20 @@ const App = () => {
               type="text" 
               name="numberfield"
               onChange={handleNumber}/>
-              <br></br>
+              <br></br><br></br>
           </label>
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
           <button type="submit">Add</button>  
         </form> 
 
-
-      <h3>Numbers on the book</h3>
+        <br></br>
+      <h3>Numbers in the book</h3>
         <div> 
           <ol> <p>Name &nbsp; &nbsp; &nbsp; &nbsp; Number</p>
             {personsToShow.map((person) => (
-              <li key={person.id}>
+              <li key={person.number}>
                 {person.name} &nbsp;- &nbsp; 
-                {person.number}
+                {person.number} &nbsp; &nbsp;<button type="button" value={person.id} onClick={deleteNumber}>Delete</button><br></br>
               </li>))}
           </ol> 
         </div>
